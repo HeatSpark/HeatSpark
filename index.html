@@ -12,8 +12,8 @@ html {scroll-behavior:smooth}
 </head>
 <body class="font-sans text-gray-800">
 
-<!-- Sticky Emergency Bar -->
-<div class="fixed bottom-0 left-0 w-full bg-[#1f2937] text-white flex justify-between items-center p-4 z-50 shadow-lg">
+<!-- Sticky Emergency Bar (shows after scroll) -->
+<div id="stickyBar" class="hidden fixed bottom-0 left-0 w-full bg-[#1f2937] text-white flex justify-between items-center p-4 z-50 shadow-lg">
   <div class="text-sm md:text-base">🚨 Emergency? Available 24/7 across London</div>
   <a href="tel:07367992225" class="bg-[#ff7a00] text-white px-6 py-3 md:px-5 md:py-2 rounded font-bold text-lg md:text-base">Call Now</a>
 </div>
@@ -27,9 +27,10 @@ html {scroll-behavior:smooth}
 <header class="bg-[#1f2937] text-white p-4 sticky top-0 z-40 shadow">
   <div class="max-w-6xl mx-auto flex justify-between items-center">
     <div class="flex items-center">
-      <img src="/mnt/data/8d9b9471-2e2a-469b-bf76-7b2a2098d71b.png" alt="Heat & Spark Services" class="h-12 md:h-14">
+      <!-- IMPORTANT: Put your logo file next to this HTML and name it logo.png (or change this src) -->
+      <!-- SAVE YOUR LOGO FILE IN THE SAME FOLDER AS THIS HTML AND NAME IT EXACTLY: heat-spark-logo.png -->
+      <img src="heat-spark-logo.png" alt="Heat & Spark Services" class="h-12 md:h-14">
     </div>
-    <a href="tel:07367992225" class="bg-[#ff7a00] text-white px-6 py-3 md:px-4 md:py-2 rounded font-bold text-lg md:text-base">Call Now</a>
   </div>
 </header>
 
@@ -146,6 +147,26 @@ html {scroll-behavior:smooth}
 <footer class="bg-gray-900 text-white text-center p-6">
   <p>© 2026 Heat & Spark Services</p>
 </footer>
+
+<script>
+  // Show sticky call bar only after the user scrolls down
+  (function () {
+    const bar = document.getElementById('stickyBar');
+    const SHOW_AFTER_PX = 220;
+
+    function onScroll() {
+      if (!bar) return;
+      if (window.scrollY > SHOW_AFTER_PX) {
+        bar.classList.remove('hidden');
+      } else {
+        bar.classList.add('hidden');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 
 </body>
 </html>
